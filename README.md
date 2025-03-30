@@ -6,37 +6,36 @@
 /* brModelo - Lógico Ana Carolina: */
 
 CREATE TABLE Cliente (
-    Nome VARCHAR(255),
-    Telefone NUMERIC,
-    id_Cliente INTEGER PRIMARY KEY,
-    Email VARCHAR(100)
-);
-
-CREATE TABLE Venda (
-    id_Venda INTEGER PRIMARY KEY,
-    Data_ Hora DATE,
-    fk_id_Cliente INTEGER,
-    fk_id_Colaborador INTEGER,
-    fk_id_Produto INTEGER
+  Nome VARCHAR(255),
+  Telefone NUMERIC,
+  id_Cliente INT PRIMARY KEY,
+  Email VARCHAR(100)
 );
 
 CREATE TABLE Colaborador (
-    Nome VARCHAR(255),
-    Cargo VARCHAR(100),
-    id_Colaborador INTEGER PRIMARY KEY
-);
-
-CREATE TABLE Estoque (
-    Quantidade INTEGER,
-    id_Estoque INTEGER PRIMARY KEY,
-    Nome VARCHAR(255),
-    Categoria VARCHAR(100),
-    Preço DECIMAL(10, 2),
+  Nome VARCHAR(255),
+  Cargo VARCHAR(100),
+  id_Colaborador INT PRIMARY KEY
 );
 
 CREATE TABLE Produto (
-    id_Estoque INTEGER,
-    id_Produto INTEGER PRIMARY KEY,
-    Nome VARCHAR(255),
-    Preço DECIMAL(10, 2),
+  id_Produto INT PRIMARY KEY,
+  Nome VARCHAR(255),
+  Preco DECIMAL(10, 2)
+);
+
+CREATE TABLE Estoque (
+  Quantidade INT,
+  id_Estoque INT PRIMARY KEY,
+  id_Produto INT,
+  FOREIGN KEY (id_Produto) REFERENCES Produto(id_Produto)
+);
+
+CREATE TABLE Venda (
+  id_Venda INT PRIMARY KEY,
+  Data_Hora DATETIME,
+  fk_id_Cliente INT,
+  fk_id_Colaborador INT,
+  FOREIGN KEY (fk_id_Cliente) REFERENCES Cliente(id_Cliente),
+  FOREIGN KEY (fk_id_Colaborador) REFERENCES Colaborador(id_Colaborador)
 );
